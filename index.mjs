@@ -19,14 +19,10 @@ export const handler = async (event) => {
       const res = await fetch(RATE_URL);
       if (res.ok) {
         const resData = await res.json();
-        data = resData;
-
-        if (!data.refRates[0]) {
-          throw "Missing data";
-        }
+        data = resData.refRates[0];
 
         // Cache the data
-        setCachedData(data.refRates[0]);
+        setCachedData(data);
       } else {
         throw "Unknown error";
       }
